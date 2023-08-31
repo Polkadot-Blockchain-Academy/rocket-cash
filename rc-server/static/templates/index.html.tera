@@ -1,0 +1,16 @@
+{% extends "templates/base" %}
+{% block body %}
+    {% if user %}
+        <div class="columns">
+            <div class="column is-3">
+                <div class="box">
+                    <p class="subtitle is-6">Total balance</p>
+                    <p class="title is-1">500₢</p>
+                </div>
+            </div>
+            <div class="column">
+                Second column
+            </div>
+        </div>
+    {% endif %}
+{% endblock body %}

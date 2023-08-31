@@ -1,0 +1,118 @@
+{% extends "templates/base" %}
+{% block body %}
+    {% if user %}
+        <div class="section">
+            <nav class="level">
+                <div class="level-item has-text-centered">
+                    <div>
+                        <p class="heading">User ID</p>
+                        <p class="title">{{ user.id }}</p>
+                    </div>
+                </div>
+                <div class="level-item has-text-centered">
+                    <div>
+                    <p class="heading">Balance</p>
+                    <p class="title">
+                        {% if balance and balance.total > 0 %}
+                            {{ balance.total }}₢
+                        {% else %}
+                            0₢
+                        {% endif %}
+                    </p>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    {% endif %}
+    
+    {% if balance and balance.total > 0 %}
+        <div class="section">
+            <form action="/transfer" method="post">
+                <div class="field has-addons">
+                    <p class="control">
+                        <a class="button is-static is-large">
+                        Transfer
+                        </a>
+                    </p>
+                    <p class="control">
+                    <input name="amount" class="input is-large" type="number" placeholder="0" max="{{ balance.total }}">
+                    </p>
+                    <p class="control">
+                        <a class="button is-static is-large">
+                        To
+                        </a>
+                    </p>
+                    <p class="control">
+                        <input name="receiver" class="input is-expanded is-large" type="text" placeholder="ID">
+                    </p>
+                    <p class="control">
+                    <button class="button is-info is-large">
+                        Transfer
+                    </button>
+                    </p>
+                </div>
+            </form>
+        </div>
+    {% endif %}
+
+    <div class="box">
+        <h2 class="title has-text-centered">Sent</h2>
+
+        {% if sent %}
+            <table class="table is-striped is-fullwidth is-hoverable">
+                <thead>
+                    <tr>
+                        <th>Sender</th>
+                        <th>Receiver</th>
+                        <th>Amount</th>
+                        <th>Transferred on</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for transfer in sent %}
+                    <tr>
+                        <td>{{ transfer.sender }}</td>
+                        <td>{{ transfer.receiver }}</td>
+                        <td>{{ transfer.amount }}</td>
+                        <td>{{ transfer.transferred_on }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <h3 class="subtitle has-text-centered">no transfers sent</h2>
+        {% endif %}
+    </div>
+
+    <div class="box">
+        <h2 class="title has-text-centered">Received</h2>
+
+        {% if received %}
+            <table class="table is-striped is-fullwidth is-hoverable">
+                <thead>
+                    <tr>
+                        <th>Sender</th>
+                        <th>Receiver</th>
+                        <th>Amount</th>
+                        <th>Transferred on</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for transfer in received %}
+                    <tr>
+                        <td>{{ transfer.sender }}</td>
+                        <td>{{ transfer.receiver }}</td>
+                        <td>{{ transfer.amount }}</td>
+                        <td>{{ transfer.transferred_on }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <h3 class="subtitle has-text-centered">no transfers received</h2>
+        {% endif %}
+    </div>
+
+{% endblock body %}

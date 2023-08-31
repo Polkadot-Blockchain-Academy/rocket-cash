@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>🚀💰 - Rocket Cash - Trust us with your transfers!</title>
+        <link rel="stylesheet" href="https://bulma.io/vendor/fontawesome-free-5.15.2-web/css/all.min.css">
+        <link rel="stylesheet" href="/css/bulma.min.css">
+    </head>
+    <body>
+        <nav class="navbar p-4" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="/">
+                    <img src="/img/logo-header.png" height="30">
+                </a>
+            </div>
+
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        {% if not user %}
+                            <a href="/signup" class="button is-info">
+                                <strong>Sign up</strong>
+                            </a>
+                            <a href="/login" class="button is-light">
+                                Log in
+                            </a>
+                        {% else %}
+                            <a href="/logout" class="button is-warning">
+                                Log out
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <section class="section">
+            <div class="container">
+                {% block body %}
+                {% endblock body %}
+            </div>
+        </section>
+    </body>
+</html>
